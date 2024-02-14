@@ -1,0 +1,17 @@
+server:
+ port: 8080
+ servlet:
+  charset: UTF-8
+  enabled: true
+  force: true
+
+spring:
+ config:
+  import:
+   - classpath:/yaml/application-dev.yml
+   - classpath:/yaml/application-local.yml
+   - classpath:/yaml/log/application-log.yml
+ profiles:
+  group:
+   logging: local,log
+  active: logging
