@@ -1,13 +1,14 @@
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FoodPriceApplication {
+public class JPA_ExampleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FoodPriceApplication.class, args);
+		SpringApplication.run(JPA_ExampleApplication.class, args);
 	}
 
 }

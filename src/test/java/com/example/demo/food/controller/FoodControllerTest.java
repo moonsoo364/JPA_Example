@@ -33,12 +33,14 @@ public class FoodControllerTest {
 	    void setUp() {
 	        Food food = new Food();
 	        food.setFoodName("banana");
+	        // 이 세션에서 NativeHibiatat Entity가 생성됨
 	        food.setNativeHabitat(new HashSet<>(Arrays.asList("INDONESIA", "JAPAN")));
 	        
 	        foodRepository.save(food); 
 	 	}
 	 @Test
 	 void giveFood() throws Exception {
+		 // setUp() 매서드에서 생성된 세션을 사용, 이 테스트가 통과됨
 		 mockMvc.perform(get("/food/banana"))
          .andExpect(status().isOk())
          .andExpect(jsonPath("$.foodName").value("banana"))

@@ -2,6 +2,7 @@ package com.example.demo.food.model;
 
 import java.util.Set;
 
+
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,3 +20,4 @@ public class Food {
 	@ElementCollection
 	private Set<String> nativeHabitat;
 }
+	

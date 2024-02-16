@@ -23,4 +23,13 @@ public class FoodServiceImpl implements FoodService{
 		return foodRepository.findByFoodName(foodName);
 	}
 
+	@Override
+	public Optional<Food> findOneNoTransaction(String foodName) {
+		Optional<Food> food = foodRepository.findByFoodName(foodName);
+		if(food.isPresent()) {
+			
+		}
+		return food;
+	}
+
 }

@@ -7,4 +7,5 @@ import com.example.demo.food.model.Food;
 public interface FoodService {
 	
 	Optional<Food> findOne(String foodName);
+	Optional<Food> findOneNoTransaction(String foodName);
 }
