@@ -32,6 +32,11 @@ public class TransactionPersistenceContextUserService implements UserService{
 	public Member find(Long id) {
 		return entityManager.find(Member.class, id);
 	}
+
+	@Override
+	public boolean isPersistenceContext(Member member) {
+		return entityManager.contains(member);
+	}
 	
 	
 }

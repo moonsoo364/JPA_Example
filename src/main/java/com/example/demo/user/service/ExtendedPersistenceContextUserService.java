@@ -33,4 +33,9 @@ public class ExtendedPersistenceContextUserService  implements UserService{
 		return entityManager.find(Member.class, id);
 	}
 
+	@Override
+	public boolean isPersistenceContext(Member member) {
+		return entityManager.contains(member);
+	}
+
 }

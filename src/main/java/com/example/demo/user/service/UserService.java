@@ -10,5 +10,7 @@ public interface UserService {
 	Member insertWithoutTransaction(Member user) ;
 	
 	Member find(Long id) ;
+	
+	boolean isPersistenceContext(Member member);
 
 }

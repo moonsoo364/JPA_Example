@@ -10,10 +10,13 @@ import com.example.demo.user.model.Member;
 import com.example.demo.user.service.ExtendedPersistenceContextUserService;
 import com.example.demo.user.service.TransactionPersistenceContextUserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @SpringBootTest
+@Slf4j
 public class TestExtendedPersistenceContext {
 	@Autowired
-	TransactionPersistenceContextUserService tpcUserServie;
+	TransactionPersistenceContextUserService tpcUserService;
 	
 	@Autowired
 	ExtendedPersistenceContextUserService epcUserService;
@@ -23,33 +26,17 @@ public class TestExtendedPersistenceContext {
 		
 		Member member  = new Member(121L,"mskwon","admin");
 		epcUserService.insertWithoutTransaction(member);
-		//Select In Persistence Context
+		log.debug("[EPC]Is Persistence Context: {}",epcUserService.isPersistenceContext(member));
 		Member userFromExtendedPersistenceContext = epcUserService.find(member.getId());
 		assertNotNull(userFromExtendedPersistenceContext);
 		
+		
+		log.debug("[TPC]Is Persistence Context: {}",tpcUserService.isPersistenceContext(member));
 		//Create New Persistence Context, Select In DB
-		Member userFromTransactionPersistenceContext = tpcUserServie.find(member.getId());
+		Member userFromTransactionPersistenceContext = tpcUserService.find(member.getId());
 		assertNotNull(userFromTransactionPersistenceContext);
 		
 
 	}
 	
-	@Test
-	public void testUserInsertWithTransaction2() {
-		Member member1 = new Member(124L, "Devender", "admin");
-		epcUserService.insertWithoutTransaction(member1);
-
-		Member member2 = new Member(125L, "Devender", "admin");
-		epcUserService.insertWithTransaction(member2);
-
-		Member member1FromTransctionPersistenceContext = tpcUserServie
-		  .find(member1.getId());
-		assertNotNull(member1FromTransctionPersistenceContext);
-
-		Member member2FromTransctionPersistenceContext = tpcUserServie
-		  .find(member2.getId());
-		assertNotNull(member2FromTransctionPersistenceContext);
-		
-
-	}
 }

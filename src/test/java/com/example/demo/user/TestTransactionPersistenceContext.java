@@ -10,7 +10,10 @@ import com.example.demo.user.model.Member;
 import com.example.demo.user.service.ExtendedPersistenceContextUserService;
 import com.example.demo.user.service.TransactionPersistenceContextUserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @SpringBootTest
+@Slf4j
 public class TestTransactionPersistenceContext {
 	
 	@Autowired
@@ -21,13 +24,15 @@ public class TestTransactionPersistenceContext {
 	
 	@Test
 	public void testUserInsertWithTransaction() {
-		//Pesistence Context(O) DB(O)
+		//Pesistence Context(X) DB(O)
 		Member member  = new Member(121L,"mskwon","admin");
 		tpcUserServie.insertWithTransaction(member);
-		// Select In Persistence Context
+		
+		log.debug("[TPC]Is Persistence Context: {}",tpcUserServie.isPersistenceContext(member));
 		Member userFromTransactionPersistenceContext = tpcUserServie.find(member.getId());
 		assertNotNull(userFromTransactionPersistenceContext);
-		// Select In DB
+		
+		log.debug("[EPC]Is Persistence Context: {}",epcUserService.isPersistenceContext(member));
 		Member userFromExtendedPersistenceContext = epcUserService.find(member.getId());
 		assertNotNull(userFromExtendedPersistenceContext);
 	}
